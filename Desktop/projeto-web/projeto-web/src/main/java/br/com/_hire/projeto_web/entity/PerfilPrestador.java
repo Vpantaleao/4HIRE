@@ -1,6 +1,9 @@
 package br.com._hire.projeto_web.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -24,10 +27,13 @@ public class PerfilPrestador {
     @Column(columnDefinition = "TEXT")
     private String biografia;
 
+    @Column(nullable = false)
     private Boolean ativo = true;
 
+    @Column(nullable = false)
     private Boolean verificadoAntecedentes = false;
 
+    @Column(nullable = false)
     private Boolean verificadoTecnico = false;
 
     @Column(precision = 9, scale = 6)
@@ -36,6 +42,9 @@ public class PerfilPrestador {
     @Column(precision = 9, scale = 6)
     private BigDecimal longitudeBase;
 
+    @NotNull
+    @Positive
+    @Column(nullable = false)
     private Integer raioAtendimentoKm;
 
 }

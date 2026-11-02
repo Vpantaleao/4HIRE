@@ -1,6 +1,7 @@
 package br.com._hire.projeto_web.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -18,6 +19,7 @@ public class Categoria {
     @JoinColumn(name = "id_categoria_pai")
     private Categoria categoriaPai;
 
+    @NotBlank
     @Column(nullable = false, unique = true)
     private String nome;
 
