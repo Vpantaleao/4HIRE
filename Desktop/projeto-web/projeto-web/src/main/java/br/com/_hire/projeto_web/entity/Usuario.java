@@ -1,6 +1,8 @@
 package br.com._hire.projeto_web.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -17,18 +19,25 @@ public class Usuario {
     @Column(name = "id_usuario")
     private UUID id;
 
+    @NotBlank
     @Column(nullable = false)
     private String nome;
 
+    @NotBlank
+    @Email
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotBlank
     @Column(nullable = false)
     private String senhaHash;
 
+    @NotBlank
+    @Column(nullable = false)
     private String telefone;
 
-    @Column(unique = true)
+    @NotBlank
+    @Column(unique = true, nullable = false)
     private String cpf;
 
     @Column(nullable = false, updatable = false)
