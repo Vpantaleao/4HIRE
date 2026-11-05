@@ -46,6 +46,9 @@ public class Pagamento {
 
     private LocalDateTime dataPagamento;
 
+    @Version
+    private Long versao;
+
     @PrePersist
     void aoCriar() {
         this.dataCriacao = LocalDateTime.now();

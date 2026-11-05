@@ -37,7 +37,7 @@ public class PagamentoService {
 
     @Transactional
     public PagamentoResponseDTO criar(PagamentoCreateDTO dto) {
-        SolicitacaoOrcamento orcamento = orcamentoRepository.findById(dto.orcamentoId())
+        SolicitacaoOrcamento orcamento = orcamentoRepository.buscarParaAtualizar(dto.orcamentoId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Orçamento não encontrado: " + dto.orcamentoId()));
 
         if (!STATUS_QUE_PERMITEM_PAGAMENTO.contains(orcamento.getStatusAtual())) {
@@ -77,6 +77,9 @@ public class PagamentoService {
     public PagamentoResponseDTO confirmar(UUID id) {
         Pagamento pagamento = buscarEntidade(id);
         exigirStatus(pagamento, StatusPagamento.PENDENTE, "confirmar");
+        if (!STATUS_QUE_PERMITEM_PAGAMENTO.contains(pagamento.getOrcamento().getStatusAtual())) {
+            throw new ConflitoException("O orçamento não está mais em um status que permita pagamento");
+        }
         pagamento.setStatus(StatusPagamento.PAGO);
         pagamento.setDataPagamento(LocalDateTime.now());
         return PagamentoResponseDTO.de(pagamentoRepository.save(pagamento));
