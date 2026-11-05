@@ -4,8 +4,15 @@ import br.com._hire.projeto_web.entity.SolicitacaoOrcamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface SolicitacaoOrcamentoRepository extends JpaRepository<SolicitacaoOrcamento, UUID> {
+
+    List<SolicitacaoOrcamento> findByClienteIdOrderByDataSolicitacaoDesc(UUID clienteId);
+
+    List<SolicitacaoOrcamento> findByPerfilPrestadorIdOrderByDataSolicitacaoDesc(UUID perfilPrestadorId);
+
+    boolean existsByConversaId(UUID conversaId);
 }
