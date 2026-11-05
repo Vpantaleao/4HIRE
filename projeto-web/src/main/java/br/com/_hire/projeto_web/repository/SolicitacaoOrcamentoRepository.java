@@ -1,5 +1,3 @@
-// versão provisória, apagar quando santana e daniel colocarem a deles
-
 package br.com._hire.projeto_web.repository;
 
 import br.com._hire.projeto_web.entity.SolicitacaoOrcamento;
