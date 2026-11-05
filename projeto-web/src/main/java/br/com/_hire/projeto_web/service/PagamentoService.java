@@ -37,7 +37,7 @@ public class PagamentoService {
 
     @Transactional
     public PagamentoResponseDTO criar(PagamentoCreateDTO dto) {
-        SolicitacaoOrcamento orcamento = orcamentoRepository.buscarParaAtualizar(dto.orcamentoId())
+        SolicitacaoOrcamento orcamento = pagamentoRepository.buscarOrcamentoParaAtualizar(dto.orcamentoId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Orçamento não encontrado: " + dto.orcamentoId()));
 
         if (!STATUS_QUE_PERMITEM_PAGAMENTO.contains(orcamento.getStatusAtual())) {
